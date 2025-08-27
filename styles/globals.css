@@ -1,6 +1,12 @@
-body {
+/* Reset básico */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body y fondo global */
+body {
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
   color: white;
@@ -8,17 +14,26 @@ body {
   background-size: cover;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  padding-top: 100px; /* Para navbar fija */
 }
 
-/* Glow en títulos y botones */
+/* Títulos y glow */
 h1, h2, h3, h4, button, a {
   text-shadow: 0 0 5px #ff004f, 0 0 10px #ff004f;
 }
 
-/* Secciones */
+/* Secciones con animación de scroll */
 section {
   padding: 60px 20px;
-  transition: transform 0.5s, opacity 0.5s;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Formularios */
@@ -63,11 +78,18 @@ header {
   left: 0;
   width: 100%;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
 }
 
 /* Flip cards */
 .flip-card {
   perspective: 1000px;
+  width: 250px;
+  margin: 0 auto;
+  cursor: pointer;
 }
 
 .flip-card-inner {
@@ -118,7 +140,7 @@ footer {
   text-align: center;
 }
 
-/* Animaciones globales */
+/* Animaciones */
 @keyframes bounceShimmer {
   0% { transform: translateY(0); box-shadow: 0 0 10px #ff004f; }
   25% { transform: translateY(-5px); box-shadow: 0 0 20px #ff004f, 0 0 10px #ff66a3; }
