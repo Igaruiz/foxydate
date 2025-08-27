@@ -170,6 +170,112 @@ export default function Home() {
         </div>
       </section>
 
+{/* Contacto */}
+<section
+  id="contacto"
+  style={{
+    padding: "60px 20px",
+    textAlign: "center",
+    backgroundColor: "#111",
+    color: "white"
+  }}
+>
+  <h2 style={{ fontSize: "36px", marginBottom: "30px", color: "#ff004f" }}>
+    Contáctanos 📩
+  </h2>
+  <p style={{ maxWidth: "600px", margin: "0 auto 40px auto" }}>
+    ¿Tienes preguntas o quieres una experiencia personalizada?  
+    Escríbenos y nos pondremos en contacto contigo.
+  </p>
+
+  <form
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "20px",
+      maxWidth: "500px",
+      margin: "0 auto"
+    }}
+    onSubmit={(e) => {
+      e.preventDefault();
+      const nombre = e.target.nombre.value;
+      const email = e.target.email.value;
+      const mensaje = e.target.mensaje.value;
+      const texto = `👋 Hola, soy ${nombre} (${email}).%0A%0A${mensaje}`;
+      window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
+    }}
+  >
+    <input
+      type="text"
+      name="nombre"
+      placeholder="Tu nombre"
+      required
+      style={{
+        padding: "15px",
+        borderRadius: "15px",
+        border: "none",
+        backgroundColor: "#222",
+        color: "white",
+        fontSize: "16px"
+      }}
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="Tu correo"
+      required
+      style={{
+        padding: "15px",
+        borderRadius: "15px",
+        border: "none",
+        backgroundColor: "#222",
+        color: "white",
+        fontSize: "16px"
+      }}
+    />
+    <textarea
+      name="mensaje"
+      rows="5"
+      placeholder="Escribe tu mensaje..."
+      required
+      style={{
+        padding: "15px",
+        borderRadius: "15px",
+        border: "none",
+        backgroundColor: "#222",
+        color: "white",
+        fontSize: "16px",
+        resize: "none"
+      }}
+    ></textarea>
+    <button
+  type="submit"
+  style={{
+    padding: "15px",
+    borderRadius: "30px",
+    backgroundColor: "#ff004f",
+    color: "white",
+    fontSize: "18px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "0.3s, box-shadow 0.3s",
+    boxShadow: "0 0 10px #ff004f"
+  }}
+  onMouseOver={e => {
+    e.currentTarget.style.backgroundColor = "#ff66a3";
+    e.currentTarget.style.boxShadow = "0 0 20px #ff004f, 0 0 40px #ff66a3";
+  }}
+  onMouseOut={e => {
+    e.currentTarget.style.backgroundColor = "#ff004f";
+    e.currentTarget.style.boxShadow = "0 0 10px #ff004f";
+  }}
+>
+  Enviar por WhatsApp
+</button>
+
+  </form>
+</section>
+
       {/* Footer simple */}
       <footer style={{ textAlign: "center", padding: "40px 20px", backgroundColor: "#111", color: "white" }}>
         © 2025 Foxy Date 🦊 | Amor virtual, real diversión.
