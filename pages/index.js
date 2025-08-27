@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       <Navbar />
       <section id="about" className="min-h-screen flex items-center justify-center bg-dark text-white">
-        <h1 className="text-5xl font-bold text-foxyred">Bienvenido a Foxy Date 🦊</h1>
+        <h1 className="text-5xl font-bold text-foxyred">La experiencia de citas más 🔥 de internet</h1>
       </section>
       <section id="planes" className="min-h-screen flex items-center justify-center bg-black text-white">
         <h2 className="text-3xl">Nuestros Planes</h2>
