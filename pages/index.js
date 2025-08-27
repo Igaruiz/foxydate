@@ -5,22 +5,50 @@ export default function Home() {
     <div>
       <Navbar />
 
-      {/* Hero */}
-      <section
-        id="about"
-        className="min-h-screen flex flex-col items-center justify-center bg-dark text-center px-6"
-      >
-        <h1 className="text-5xl md:text-6xl font-extrabold text-foxyred mb-6">
-          Foxy Date 🦊
-        </h1>
-        <p className="text-lg md:text-2xl text-gray-300 max-w-2xl">
-          La experiencia de <span className="text-neonpink">citas virtuales</span> más
-          atrevida de internet. Conecta, charla y disfruta de compañía cuando quieras.
-        </p>
-        <button className="mt-8 bg-foxyred hover:bg-neonpink text-white px-8 py-3 rounded-2xl font-semibold transition">
-          ¡Empieza tu cita ahora!
-        </button>
-      </section>
+{/* Hero */}
+<section 
+  style={{
+    minHeight: "100vh",
+    backgroundImage: "url('/fondo.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "40px",
+    color: "white",
+    textAlign: "left"
+  }}
+>
+  {/* Contenedor con logo + texto */}
+  <div style={{ maxWidth: "600px", backgroundColor: "rgba(0,0,0,0.6)", padding: "30px", borderRadius: "20px" }}>
+    <img src="/logo.png" alt="Foxy Date Logo" style={{ height: "60px", marginBottom: "20px" }} />
+    <h1 style={{ fontSize: "48px", fontWeight: "bold", marginBottom: "20px", color: "#ff004f" }}>
+      Bienvenido a Foxy Date 🦊
+    </h1>
+    <p style={{ fontSize: "20px", marginBottom: "20px" }}>
+      Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables con nuestras chicas virtuales.
+    </p>
+    <a 
+      href="#planes" 
+      style={{
+        backgroundColor: "#ff004f",
+        color: "white",
+        padding: "15px 30px",
+        borderRadius: "30px",
+        fontSize: "18px",
+        textDecoration: "none"
+      }}
+    >
+      Ver planes 🔥
+    </a>
+  </div>
+
+  {/* Imagen de la chica al costado */}
+  <div style={{ marginLeft: "40px" }}>
+    <img src="/chica1.jpg" alt="Chica Foxy Date" style={{ borderRadius: "20px", width: "350px", boxShadow: "0px 0px 20px rgba(255,0,79,0.8)" }} />
+  </div>
+</section>
 
       {/* Paquetes */}
       <section
