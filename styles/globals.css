@@ -2,17 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Estilos globales del body */
 body {
-  @apply bg-dark text-white antialiased;
-}
-
-/* Fondo global en toda la página */
-body {
+  @apply text-white antialiased;
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: url('/fondo.jpg') no-repeat center center fixed;
-  background-size: cover;
   font-family: Arial, sans-serif;
-  color: white;
+  position: relative;
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+/* Fondo global con overlay, gradiente animado y zoom */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  /* Imagen de fondo + gradiente animado */
+  background-image:
+    radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%),
+    linear-gradient(270deg, #ff004f, #ff9f00, #00ffe5, #ff004f),
+    url('/fondo.jpg');
+  background-blend-mode: overlay, overlay;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  /* Animación de zoom suave */
+  animation: fondoZoom 30s ease-in-out infinite alternate, gradienteAnim 60s linear infinite;
+}
+
+/* Zoom lento */
+@keyframes fondoZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Animación del gradiente para efecto neón suave */
+@keyframes gradienteAnim {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Partículas flotando */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: particulas 120s linear infinite;
+  z-index: -1;
+}
+
+/* Animación de partículas flotando */
+@keyframes particulas {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-25px, 50px); }
+  100% { transform: translate(0, 0); }
 }
