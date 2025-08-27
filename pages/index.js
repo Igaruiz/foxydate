@@ -1,5 +1,6 @@
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CatalogoChicas from "@/components/CatalogoChicas";
 
 export default function Home() {
   return (
@@ -7,14 +8,16 @@ export default function Home() {
       <Navbar />
 
       {/* Hero */}
-      <section 
+      <section
         style={{
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           padding: "40px",
-          textAlign: "left"
+          textAlign: "left",
+          flexWrap: "wrap",
+          gap: "40px"
         }}
       >
         {/* Contenedor con logo + texto */}
@@ -42,7 +45,7 @@ export default function Home() {
         </div>
 
         {/* Imagen de la chica al costado */}
-        <div style={{ marginLeft: "40px" }}>
+        <div>
           <img src="/chica1.jpg" alt="Chica Foxy Date" style={{ borderRadius: "20px", width: "350px", boxShadow: "0px 0px 20px rgba(255,0,79,0.8)" }} />
         </div>
       </section>
@@ -52,16 +55,8 @@ export default function Home() {
         <h2 style={{ fontSize: "36px", marginBottom: "30px", color: "#ff004f", textAlign: "center" }}>
           Nuestras Chicas 🦊
         </h2>
-
-        <p style={{ textAlign: "center" }}>
-          Aquí aparecerán las chicas con sus fotos, descripciones y precios. 🚀
-        </p>
+        <CatalogoChicas />
       </section>
-
-      <Footer />
-    </>
-  )
-}
 
       {/* Paquetes */}
       <section
@@ -151,7 +146,6 @@ export default function Home() {
             window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
           }}
         >
-          {/* Nombre */}
           <div className="flex flex-col text-left">
             <label className="text-gray-400 mb-2">Nombre</label>
             <input
@@ -162,8 +156,6 @@ export default function Home() {
               className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
             />
           </div>
-
-          {/* Email */}
           <div className="flex flex-col text-left">
             <label className="text-gray-400 mb-2">Email</label>
             <input
@@ -174,8 +166,6 @@ export default function Home() {
               className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
             />
           </div>
-
-          {/* Mensaje */}
           <div className="flex flex-col text-left">
             <label className="text-gray-400 mb-2">Mensaje</label>
             <textarea
@@ -186,8 +176,6 @@ export default function Home() {
               className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
             ></textarea>
           </div>
-
-          {/* Botón */}
           <button
             type="submit"
             className="w-full bg-foxyred hover:bg-neonpink text-white font-semibold py-3 rounded-xl transition"
@@ -197,44 +185,7 @@ export default function Home() {
         </form>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-gray-300 py-10">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
-          
-          {/* Marca */}
-          <div>
-            <h3 className="text-2xl font-bold text-foxyred mb-3">🦊 Foxy Date</h3>
-            <p className="text-sm text-gray-400">
-              La experiencia de citas virtuales más atrevida de internet.
-            </p>
-          </div>
-
-          {/* Enlaces rápidos */}
-          <div>
-            <h4 className="font-semibold text-white mb-3">Navegación</h4>
-            <ul className="space-y-2">
-              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("about").scrollIntoView({behavior:"smooth"})}>Inicio</li>
-              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("planes").scrollIntoView({behavior:"smooth"})}>Paquetes</li>
-              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("extras").scrollIntoView({behavior:"smooth"})}>Experiencias</li>
-              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("testimonios").scrollIntoView({behavior:"smooth"})}>Opiniones</li>
-            </ul>
-          </div>
-
-          {/* Redes sociales */}
-          <div>
-            <h4 className="font-semibold text-white mb-3">Síguenos</h4>
-            <div className="flex justify-center md:justify-start space-x-6">
-              <a href="https://instagram.com" target="_blank" className="hover:text-neonpink transition">📸 Instagram</a>
-              <a href="https://tiktok.com" target="_blank" className="hover:text-neonpink transition">🎵 TikTok</a>
-            </div>
-          </div>
-        </div>
-
-        {/* Línea inferior */}
-        <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-500">
-          © 2025 Foxy Date 🦊 | Amor virtual, real diversión.
-        </div>
-      </footer>
-    </div>
-  )
+      <Footer />
+    </>
+  );
 }
