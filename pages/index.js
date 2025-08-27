@@ -5,6 +5,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    // Animación de scroll
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(
       entries => {
@@ -18,6 +19,7 @@ export default function Home() {
     );
     sections.forEach(section => observer.observe(section));
 
+    // Parallax hero
     const heroImg = document.querySelector(".hero-container img");
     const handleScroll = () => {
       const offset = window.pageYOffset;
@@ -34,12 +36,16 @@ export default function Home() {
   ];
 
   const scrollTo = (id) => {
-    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+    const yOffset = -100; // altura de la navbar
+    const element = document.getElementById(id);
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
     setMenuOpen(false); // cierra menú en móviles
   }
 
   return (
     <>
+      {/* Navbar */}
       <header>
         <img src="/logo.png" alt="Logo Foxy" />
         <div className="hamburger" onClick={()=>setMenuOpen(!menuOpen)}>
@@ -57,6 +63,7 @@ export default function Home() {
         </nav>
       </header>
 
+      {/* Hero */}
       <section className="hero-container">
         <div style={{maxWidth:"700px",backgroundColor:"rgba(0,0,0,0.6)",padding:"50px",borderRadius:"25px"}}>
           <h1 style={{fontSize:"60px",color:"#ff004f",marginBottom:"30px"}}>Bienvenido a Foxy Date 🦊</h1>
@@ -66,6 +73,7 @@ export default function Home() {
         <img src="/chica1.jpg" alt="Chica Foxy"/>
       </section>
 
+      {/* Catálogo de chicas */}
       <section id="catalogo">
         <h2 style={{fontSize:"40px",color:"#ff004f",textAlign:"center",marginBottom:"40px"}}>Nuestras Chicas 🦊</h2>
         <div style={{display:"flex",justifyContent:"center",gap:"30px",flexWrap:"wrap"}}>
@@ -80,6 +88,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Paquetes */}
       <section id="planes">
         <h2 style={{fontSize:"36px",color:"#ff004f",textAlign:"center",marginBottom:"30px"}}>Nuestros Paquetes 🔥</h2>
         <div style={{display:"flex",justifyContent:"center",gap:"30px",flexWrap:"wrap"}}>
@@ -89,6 +98,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Extras */}
       <section id="extras">
         <h2 style={{fontSize:"36px",color:"#ff004f",textAlign:"center",marginBottom:"30px"}}>Extras ✨</h2>
         <ul style={{maxWidth:"600px",margin:"0 auto",listStyle:"none",padding:"0"}}>
@@ -99,6 +109,7 @@ export default function Home() {
         </ul>
       </section>
 
+      {/* Testimonios */}
       <section id="testimonios">
         <h2 style={{fontSize:"36px",color:"#ff004f",textAlign:"center",marginBottom:"30px"}}>Opiniones 💬</h2>
         <div style={{display:"flex",justifyContent:"center",gap:"30px",flexWrap:"wrap",maxWidth:"900px",margin:"0 auto"}}>
@@ -107,6 +118,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contacto */}
       <section id="contacto">
         <h2 style={{fontSize:"36px",color:"#ff004f",textAlign:"center",marginBottom:"30px"}}>Contáctanos 📩</h2>
         <form style={{maxWidth:"600px",margin:"0 auto",display:"flex",flexDirection:"column",gap:"15px"}}
@@ -125,6 +137,7 @@ export default function Home() {
         </form>
       </section>
 
+      {/* Footer */}
       <footer>© 2025 Foxy Date 🦊 | Amor virtual, real diversión.</footer>
     </>
   )
