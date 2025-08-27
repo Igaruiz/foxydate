@@ -37,13 +37,13 @@ export default function Navbar() {
             onClick={() => scrollTo("extras")}
             className="cursor-pointer hover:text-neonpink transition"
           >
-            Experiencias
+            Extras
           </li>
           <li
             onClick={() => scrollTo("testimonios")}
             className="cursor-pointer hover:text-neonpink transition"
           >
-            Opiniones
+            Experiencias
           </li>
         </ul>
 
