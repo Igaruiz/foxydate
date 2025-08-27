@@ -88,9 +88,40 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="p-6 text-center bg-dark text-gray-400">
-        © 2025 Foxy Date 🦊 | Amor virtual, real diversión.
+      <footer className="bg-black text-gray-300 py-10">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
+          
+          {/* Marca */}
+          <div>
+            <h3 className="text-2xl font-bold text-foxyred mb-3">🦊 Foxy Date</h3>
+            <p className="text-sm text-gray-400">
+              La experiencia de citas virtuales más atrevida de internet.
+            </p>
+          </div>
+
+          {/* Enlaces rápidos */}
+          <div>
+            <h4 className="font-semibold text-white mb-3">Navegación</h4>
+            <ul className="space-y-2">
+              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("about").scrollIntoView({behavior:"smooth"})}>Inicio</li>
+              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("planes").scrollIntoView({behavior:"smooth"})}>Paquetes</li>
+              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("extras").scrollIntoView({behavior:"smooth"})}>Experiencias</li>
+              <li className="hover:text-neonpink cursor-pointer" onClick={() => document.getElementById("testimonios").scrollIntoView({behavior:"smooth"})}>Opiniones</li>
+            </ul>
+          </div>
+
+          {/* Redes sociales */}
+          <div>
+            <h4 className="font-semibold text-white mb-3">Síguenos</h4>
+            <div className="flex justify-center md:justify-start space-x-6">
+              <a href="https://instagram.com" target="_blank" className="hover:text-neonpink transition">📸 Instagram</a>
+              <a href="https://tiktok.com" target="_blank" className="hover:text-neonpink transition">🎵 TikTok</a>
+            </div>
+          </div>
+        </div>
+
+        {/* Línea inferior */}
+        <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-500">
+          © 2025 Foxy Date 🦊 | Amor virtual, real diversión.
+        </div>
       </footer>
-    </div>
-  )
-}
