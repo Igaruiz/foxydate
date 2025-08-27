@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-        {/* Contacto */}
+      {/* Contacto */}
       <section
         id="contacto"
         className="min-h-screen flex flex-col items-center justify-center bg-dark text-center px-6"
@@ -98,13 +98,26 @@ export default function Home() {
           Escríbenos y nos pondremos en contacto contigo.
         </p>
 
-        <form className="bg-black p-8 rounded-2xl shadow-lg max-w-lg w-full space-y-6">
+        <form
+          className="bg-black p-8 rounded-2xl shadow-lg max-w-lg w-full space-y-6"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const nombre = e.target.nombre.value;
+            const email = e.target.email.value;
+            const mensaje = e.target.mensaje.value;
+
+            const texto = `👋 Hola, soy ${nombre} (${email}).%0A%0A${mensaje}`;
+            window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
+          }}
+        >
           {/* Nombre */}
           <div className="flex flex-col text-left">
             <label className="text-gray-400 mb-2">Nombre</label>
             <input
               type="text"
+              name="nombre"
               placeholder="Tu nombre"
+              required
               className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
             />
           </div>
@@ -114,7 +127,9 @@ export default function Home() {
             <label className="text-gray-400 mb-2">Email</label>
             <input
               type="email"
+              name="email"
               placeholder="tucorreo@email.com"
+              required
               className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
             />
           </div>
@@ -124,7 +139,9 @@ export default function Home() {
             <label className="text-gray-400 mb-2">Mensaje</label>
             <textarea
               rows="4"
+              name="mensaje"
               placeholder="Escribe tu mensaje..."
+              required
               className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
             ></textarea>
           </div>
@@ -134,7 +151,7 @@ export default function Home() {
             type="submit"
             className="w-full bg-foxyred hover:bg-neonpink text-white font-semibold py-3 rounded-xl transition"
           >
-            Enviar mensaje
+            Enviar por WhatsApp
           </button>
         </form>
       </section>
