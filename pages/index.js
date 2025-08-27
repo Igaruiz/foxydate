@@ -1,54 +1,76 @@
-import Navbar from '../components/Navbar'
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 export default function Home() {
   return (
-    <div>
-      <Navbar />
-
-{/* Hero */}
-<section 
-  style={{
-    minHeight: "100vh",
-    backgroundImage: "url('/fondo.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "40px",
-    color: "white",
-    textAlign: "left"
-  }}
->
-  {/* Contenedor con logo + texto */}
-  <div style={{ maxWidth: "600px", backgroundColor: "rgba(0,0,0,0.6)", padding: "30px", borderRadius: "20px" }}>
-    <img src="/logo.png" alt="Foxy Date Logo" style={{ height: "60px", marginBottom: "20px" }} />
-    <h1 style={{ fontSize: "48px", fontWeight: "bold", marginBottom: "20px", color: "#ff004f" }}>
-      Bienvenido a Foxy Date 🦊
-    </h1>
-    <p style={{ fontSize: "20px", marginBottom: "20px" }}>
-      Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables con nuestras chicas virtuales.
-    </p>
-    <a 
-      href="#planes" 
+    <div 
       style={{
-        backgroundColor: "#ff004f",
-        color: "white",
-        padding: "15px 30px",
-        borderRadius: "30px",
-        fontSize: "18px",
-        textDecoration: "none"
+        minHeight: "100vh",
+        backgroundImage: "url('/fondo.jpg')",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+        color: "white"
       }}
     >
-      Ver planes 🔥
-    </a>
-  </div>
+      <Navbar />
 
-  {/* Imagen de la chica al costado */}
-  <div style={{ marginLeft: "40px" }}>
-    <img src="/chica1.jpg" alt="Chica Foxy Date" style={{ borderRadius: "20px", width: "350px", boxShadow: "0px 0px 20px rgba(255,0,79,0.8)" }} />
-  </div>
-</section>
+      {/* Hero */}
+      <section 
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "40px",
+          textAlign: "left"
+        }}
+      >
+        {/* Contenedor con logo + texto */}
+        <div style={{ maxWidth: "600px", backgroundColor: "rgba(0,0,0,0.6)", padding: "30px", borderRadius: "20px" }}>
+          <img src="/logo.png" alt="Foxy Date Logo" style={{ height: "60px", marginBottom: "20px" }} />
+          <h1 style={{ fontSize: "48px", fontWeight: "bold", marginBottom: "20px", color: "#ff004f" }}>
+            Bienvenido a Foxy Date 🦊
+          </h1>
+          <p style={{ fontSize: "20px", marginBottom: "20px" }}>
+            Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables con nuestras chicas virtuales.
+          </p>
+          <a 
+            href="#catalogo" 
+            style={{
+              backgroundColor: "#ff004f",
+              color: "white",
+              padding: "15px 30px",
+              borderRadius: "30px",
+              fontSize: "18px",
+              textDecoration: "none"
+            }}
+          >
+            Ver catálogo 🔥
+          </a>
+        </div>
+
+        {/* Imagen de la chica al costado */}
+        <div style={{ marginLeft: "40px" }}>
+          <img src="/chica1.jpg" alt="Chica Foxy Date" style={{ borderRadius: "20px", width: "350px", boxShadow: "0px 0px 20px rgba(255,0,79,0.8)" }} />
+        </div>
+      </section>
+
+      {/* Catálogo de chicas */}
+      <section id="catalogo" style={{ padding: "60px 20px" }}>
+        <h2 style={{ fontSize: "36px", marginBottom: "30px", color: "#ff004f", textAlign: "center" }}>
+          Nuestras Chicas 🦊
+        </h2>
+
+        <p style={{ textAlign: "center" }}>
+          Aquí aparecerán las chicas con sus fotos, descripciones y precios. 🚀
+        </p>
+      </section>
+
+      <Footer />
+    </div>
+  )
+}
 
       {/* Paquetes */}
       <section
