@@ -50,12 +50,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experiencias */}
+      {/* Extras */}
       <section
         id="extras"
         className="min-h-screen flex flex-col items-center justify-center bg-dark text-center px-6"
       >
-        <h2 className="text-4xl font-bold text-foxyred mb-10">Experiencias ✨</h2>
+        <h2 className="text-4xl font-bold text-foxyred mb-10">Extras ✨</h2>
         <ul className="space-y-4 text-lg text-gray-300">
           <li>🎁 Regalos virtuales para sorprender a tu pareja.</li>
           <li>💎 Stickers y emojis exclusivos para el chat.</li>
