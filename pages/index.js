@@ -87,6 +87,58 @@ export default function Home() {
         </div>
       </section>
 
+        {/* Contacto */}
+      <section
+        id="contacto"
+        className="min-h-screen flex flex-col items-center justify-center bg-dark text-center px-6"
+      >
+        <h2 className="text-4xl font-bold text-foxyred mb-10">Contáctanos 📩</h2>
+        <p className="text-gray-300 mb-8 max-w-xl">
+          ¿Tienes preguntas o quieres una experiencia personalizada?  
+          Escríbenos y nos pondremos en contacto contigo.
+        </p>
+
+        <form className="bg-black p-8 rounded-2xl shadow-lg max-w-lg w-full space-y-6">
+          {/* Nombre */}
+          <div className="flex flex-col text-left">
+            <label className="text-gray-400 mb-2">Nombre</label>
+            <input
+              type="text"
+              placeholder="Tu nombre"
+              className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
+            />
+          </div>
+
+          {/* Email */}
+          <div className="flex flex-col text-left">
+            <label className="text-gray-400 mb-2">Email</label>
+            <input
+              type="email"
+              placeholder="tucorreo@email.com"
+              className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
+            />
+          </div>
+
+          {/* Mensaje */}
+          <div className="flex flex-col text-left">
+            <label className="text-gray-400 mb-2">Mensaje</label>
+            <textarea
+              rows="4"
+              placeholder="Escribe tu mensaje..."
+              className="p-3 rounded-lg bg-dark text-white border border-gray-700 focus:border-neonpink outline-none"
+            ></textarea>
+          </div>
+
+          {/* Botón */}
+          <button
+            type="submit"
+            className="w-full bg-foxyred hover:bg-neonpink text-white font-semibold py-3 rounded-xl transition"
+          >
+            Enviar mensaje
+          </button>
+        </form>
+      </section>
+
       {/* Footer */}
       <footer className="bg-black text-gray-300 py-10">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
