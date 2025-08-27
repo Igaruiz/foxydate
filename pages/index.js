@@ -33,26 +33,43 @@ export default function Home() {
   return (
     <>
       {/* Navbar simple */}
-      <header style={{ padding: "20px 40px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <img src="/logo.png" alt="Foxy Date Logo" style={{ height: "60px" }} />
-        <nav>
-          <a href="#catalogo" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Catálogo</a>
-          <a href="#planes" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Paquetes</a>
-          <a href="#contacto" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Contacto</a>
-        </nav>
-      </header>
+      <header
+  style={{
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    padding: "20px 40px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.8)",
+    zIndex: 1000,
+    boxShadow: "0 2px 10px rgba(0,0,0,0.5)"
+  }}
+>
+  {/* Logo */}
+  <img src="/logo.png" alt="Foxy Date Logo" style={{ height: "60px" }} />
+
+  {/* Navegación */}
+  <nav>
+    <a href="#catalogo" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Catálogo</a>
+    <a href="#planes" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Paquetes</a>
+    <a href="#contacto" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Contacto</a>
+  </nav>
+</header>
 
       {/* Hero */}
       <section
         style={{
           minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "40px",
-          textAlign: "left",
-          flexWrap: "wrap",
-          gap: "40px"
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "100px 40px 40px 40px", // <- 100px arriba para navbar fija
+      textAlign: "left",
+      flexWrap: "wrap",
+      gap: "40px"
         }}
       >
         <div style={{ maxWidth: "600px", backgroundColor: "rgba(0,0,0,0.6)", padding: "30px", borderRadius: "20px" }}>
