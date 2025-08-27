@@ -22,12 +22,12 @@ export default function Home() {
         </button>
       </section>
 
-      {/* Planes */}
+      {/* Paquetes */}
       <section
         id="planes"
         className="min-h-screen flex flex-col items-center justify-center bg-black text-center px-6"
       >
-        <h2 className="text-4xl font-bold text-neonpink mb-10">Nuestros Planes 🔥</h2>
+        <h2 className="text-4xl font-bold text-neonpink mb-10">Nuestros Paquetes 🔥</h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl">
           <div className="bg-dark p-6 rounded-2xl shadow-lg">
             <h3 className="text-2xl font-bold text-foxyred mb-4">Plan Básico</h3>
@@ -50,12 +50,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Extras */}
+      {/* Experiencias */}
       <section
         id="extras"
         className="min-h-screen flex flex-col items-center justify-center bg-dark text-center px-6"
       >
-        <h2 className="text-4xl font-bold text-foxyred mb-10">Extras ✨</h2>
+        <h2 className="text-4xl font-bold text-foxyred mb-10">Experiencias ✨</h2>
         <ul className="space-y-4 text-lg text-gray-300">
           <li>🎁 Regalos virtuales para sorprender a tu pareja.</li>
           <li>💎 Stickers y emojis exclusivos para el chat.</li>
@@ -64,12 +64,12 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* Testimonios */}
+      {/* Opiniones */}
       <section
         id="testimonios"
         className="min-h-screen flex flex-col items-center justify-center bg-black text-center px-6"
       >
-        <h2 className="text-4xl font-bold text-neonpink mb-10">Lo que dicen nuestros usuarios 💬</h2>
+        <h2 className="text-4xl font-bold text-neonpink mb-10">Opiniones de nuestros usuarios 💬</h2>
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
           <blockquote className="bg-dark p-6 rounded-2xl shadow">
             <p className="text-gray-300 italic">
@@ -125,3 +125,6 @@ export default function Home() {
           © 2025 Foxy Date 🦊 | Amor virtual, real diversión.
         </div>
       </footer>
+    </div>
+  )
+}
