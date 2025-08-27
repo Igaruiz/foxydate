@@ -34,14 +34,17 @@ header {
   flex-wrap: wrap;
 }
 
+header img {
+  height: 50px;
+}
+
 header nav {
   display: flex;
   gap: 15px;
-  flex-wrap: wrap;
   align-items: center;
 }
 
-header button {
+header button.nav-btn {
   background-color: #ff004f;
   color: white;
   padding: 8px 18px;
@@ -51,9 +54,30 @@ header button {
   transition: 0.3s, box-shadow 0.3s;
   box-shadow: 0 0 10px #ff004f;
 }
-header button:hover {
+header button.nav-btn:hover {
   background-color: #ff66a3;
   box-shadow: 0 0 20px #ff004f, 0 0 30px #ff66a3;
+}
+
+/* Botón hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: 0.3s;
+}
+nav.open {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 /* Secciones con animación de scroll */
@@ -129,7 +153,6 @@ section.visible {
   padding: 20px;
   text-align: center;
   box-shadow: 0 20px 50px rgba(255,0,79,0.5);
-  transition: box-shadow 0.2s;
 }
 
 /* Botones */
@@ -168,8 +191,11 @@ footer {
     align-items: flex-start;
   }
   header nav {
-    justify-content: center;
+    display: none;
     width: 100%;
+  }
+  .hamburger {
+    display: flex;
   }
   .flip-card {
     width: 200px;
