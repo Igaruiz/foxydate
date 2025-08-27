@@ -5,3 +5,14 @@
 body {
   @apply bg-dark text-white antialiased;
 }
+
+/* Fondo global en toda la página */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url('/fondo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: white;
+}
