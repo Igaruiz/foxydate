@@ -34,10 +34,11 @@ export default function Home() {
     <>
       {/* Navbar simple */}
       <header style={{ padding: "20px 40px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <h1 style={{ color: "#ff004f", fontSize: "28px", fontWeight: "bold" }}>🦊 Foxy Date</h1>
+        <img src="/logo.png" alt="Foxy Date Logo" style={{ height: "60px" }} />
         <nav>
           <a href="#catalogo" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Catálogo</a>
           <a href="#planes" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Paquetes</a>
+          <a href="#contacto" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Contacto</a>
         </nav>
       </header>
 
