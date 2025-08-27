@@ -3,16 +3,7 @@ import Footer from "@/components/Footer"
 
 export default function Home() {
   return (
-    <div 
-      style={{
-        minHeight: "100vh",
-        backgroundImage: "url('/fondo.jpg')",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
-        backgroundPosition: "center",
-        color: "white"
-      }}
-    >
+    <>
       <Navbar />
 
       {/* Hero */}
@@ -68,7 +59,7 @@ export default function Home() {
       </section>
 
       <Footer />
-    </div>
+    </>
   )
 }
 
