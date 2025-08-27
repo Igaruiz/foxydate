@@ -91,60 +91,62 @@ export default function Home() {
         <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "40px" }}>
           {chicas.map((chica) => (
             <div
-              key={chica.id}
-              onClick={() => setFlipped(flipped === chica.id ? null : chica.id)}
-              style={{ perspective: "1000px", width: "250px", cursor: "pointer" }}
-            >
-              <div
-                style={{
-                  width: "100%",
-                  height: "350px",
-                  borderRadius: "20px",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.5)",
-                  transformStyle: "preserve-3d",
-                  transition: "transform 0.8s",
-                  transform: flipped === chica.id ? "rotateY(180deg)" : "rotateY(0deg)",
-                  backgroundColor: "#111",
-                  position: "relative",
-                }}
-              >
-                {/* Front */}
-                <div style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%",
-                  backfaceVisibility: "hidden",
-                  borderRadius: "20px",
-                  overflow: "hidden",
-                }}>
-                  <img src={chica.foto} alt={chica.nombre} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
+  key={chica.id}
+  onClick={() => setFlipped(flipped === chica.id ? null : chica.id)}
+  style={{ perspective: "1000px", width: "250px", cursor: "pointer" }}
+>
+  <div
+    className="flip-card"
+    style={{
+      width: "100%",
+      height: "350px",
+      borderRadius: "20px",
+      boxShadow: "0 10px 20px rgba(0,0,0,0.5)",
+      transformStyle: "preserve-3d",
+      transition: "transform 0.8s, box-shadow 0.3s",
+      transform: flipped === chica.id ? "rotateY(180deg)" : "rotateY(0deg)",
+      backgroundColor: "#111",
+      position: "relative",
+    }}
+  >
+    {/* Front */}
+    <div style={{
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      backfaceVisibility: "hidden",
+      borderRadius: "20px",
+      overflow: "hidden",
+    }}>
+      <img src={chica.foto} alt={chica.nombre} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+    </div>
 
-                {/* Back */}
-                <div style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%",
-                  backfaceVisibility: "hidden",
-                  backgroundColor: "rgba(0,0,0,0.9)",
-                  color: "white",
-                  borderRadius: "20px",
-                  transform: "rotateY(180deg)",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "20px",
-                  textAlign: "center",
-                }}>
-                  <h3 style={{ fontSize: "24px", marginBottom: "10px", color: "#ff004f" }}>
-                    {chica.nombre}, {chica.edad}
-                  </h3>
-                  <p style={{ marginBottom: "15px" }}>{chica.descripcion}</p>
-                  <p style={{ fontWeight: "bold", color: "#ff004f" }}>{chica.precio}</p>
-                </div>
-              </div>
-            </div>
+    {/* Back */}
+    <div style={{
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      backfaceVisibility: "hidden",
+      backgroundColor: "rgba(0,0,0,0.9)",
+      color: "white",
+      borderRadius: "20px",
+      transform: "rotateY(180deg)",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "20px",
+      textAlign: "center",
+    }}>
+      <h3 style={{ fontSize: "24px", marginBottom: "10px", color: "#ff004f" }}>
+        {chica.nombre}, {chica.edad}
+      </h3>
+      <p style={{ marginBottom: "15px" }}>{chica.descripcion}</p>
+      <p style={{ fontWeight: "bold", color: "#ff004f" }}>{chica.precio}</p>
+    </div>
+  </div>
+</div>
+
           ))}
         </div>
       </section>
