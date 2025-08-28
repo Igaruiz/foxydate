@@ -1,102 +1,84 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 
 export default function Home() {
-  const [flip, setFlip] = useState([false, false, false]);
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [flipped, setFlipped] = useState([false, false, false]);
+  const carouselRef = useRef(null);
 
-  const carouselImages = [
-    "/galeria1.jpg",
-    "/galeria2.jpg",
-    "/galeria3.jpg",
-    "/galeria4.jpg",
-    "/galeria5.jpg"
-  ];
+  const flipCard = (index) => {
+    const newFlipped = [...flipped];
+    newFlipped[index] = !newFlipped[index];
+    setFlipped(newFlipped);
+  };
 
-  const catalogoChicas = [
-    { nombre: "Chica 1", edad: 22, precio: "$30", img: "/catalogo1.jpg", desc: "Extrovertida y divertida." },
-    { nombre: "Chica 2", edad: 25, precio: "$40", img: "/catalogo2.jpg", desc: "Romántica y aventurera." },
-    { nombre: "Chica 3", edad: 28, precio: "$50", img: "/catalogo3.jpg", desc: "Misteriosa y encantadora." }
-  ];
+  const nextSlide = () => {
+    const track = carouselRef.current;
+    track.appendChild(track.firstElementChild);
+  };
 
-  const planes = [
-    { titulo: "Plan Básico", desc: "Acceso a chat básico y matches ilimitados. Ideal para empezar a coquetear.", destacado: false },
-    { titulo: "Plan Premium", desc: "Incluye videollamadas privadas y regalos virtuales. La experiencia completa.", destacado: true },
-    { titulo: "Plan VIP", desc: "Acceso exclusivo a perfiles top, soporte 24/7 y eventos privados.", destacado: false }
-  ];
-
-  const opiniones = [
-    { nombre: "Carlos, 29", texto: "Nunca pensé que tendría una cita virtual tan divertida y realista. Foxy Date me salvó del aburrimiento." },
-    { nombre: "Sofía, 25", texto: "Me encanta el plan Premium, las videollamadas son súper fluidas y seguras." }
-  ];
-
-  const carouselRef = useRef();
-
-  // Carrusel automático
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCarouselIndex(prev => (prev + 1) % carouselImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const scrollTo = id => {
-    const el = document.getElementById(id);
-    if(el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const prevSlide = () => {
+    const track = carouselRef.current;
+    track.insertBefore(track.lastElementChild, track.firstElementChild);
   };
 
   return (
     <>
       {/* Navbar */}
       <header>
-        <img src="/logo.png" alt="Logo" onClick={() => scrollTo("hero")} />
+        <img src="/logo.png" alt="Logo" />
         <nav>
-          <button className="nav-btn" onClick={() => scrollTo("hero")}>Inicio</button>
-          <button className="nav-btn" onClick={() => scrollTo("catalogo")}>Chicas</button>
-          <button className="nav-btn" onClick={() => scrollTo("planes")}>Planes</button>
-          <button className="nav-btn" onClick={() => scrollTo("opiniones")}>Opiniones</button>
-          <button className="nav-btn" onClick={() => scrollTo("contacto")}>Contacto</button>
-          <button className="nav-btn" onClick={() => window.scrollTo({top:0, behavior:"smooth"})}>Top</button>
+          <button className="nav-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            Top
+          </button>
+          <button className="nav-btn" onClick={() => document.getElementById("catalogo").scrollIntoView({behavior:"smooth"})}>
+            Chicas
+          </button>
+          <button className="nav-btn" onClick={() => document.getElementById("planes").scrollIntoView({behavior:"smooth"})}>
+            Paquetes
+          </button>
+          <button className="nav-btn" onClick={() => document.getElementById("opiniones").scrollIntoView({behavior:"smooth"})}>
+            Opiniones
+          </button>
+          <button className="nav-btn" onClick={() => document.getElementById("contacto").scrollIntoView({behavior:"smooth"})}>
+            Contacto
+          </button>
         </nav>
       </header>
 
       {/* Hero */}
-      <section id="hero" className="hero-container">
+      <section className="hero-container">
         <h1>Bienvenido a Foxy Date 🦊</h1>
-        <p>Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables.</p>
-        <a className="button" href="#catalogo">Ver catálogo 🔥</a>
+        <p>Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables con nuestras chicas virtuales.</p>
+        <a href="#catalogo" className="button">Ver catálogo 🔥</a>
       </section>
 
-      {/* Carrusel Galería */}
+      {/* Carrusel */}
       <section className="carousel-container">
-        <div
-          className="carousel-track"
-          ref={carouselRef}
-          style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
-        >
-          {carouselImages.map((img, idx) => (
-            <img key={idx} src={img} alt={`Galería ${idx+1}`} />
-          ))}
+        <div className="carousel-track" ref={carouselRef}>
+          <img src="/galeria1.jpg" alt="Galería 1" />
+          <img src="/galeria2.jpg" alt="Galería 2" />
+          <img src="/galeria3.jpg" alt="Galería 3" />
+          <img src="/galeria4.jpg" alt="Galería 4" />
+          <img src="/galeria5.jpg" alt="Galería 5" />
+        </div>
+        <div style={{ textAlign: "center", marginTop: "10px" }}>
+          <button className="nav-btn" onClick={prevSlide}>◀</button>
+          <button className="nav-btn" onClick={nextSlide}>▶</button>
         </div>
       </section>
 
-      {/* Catálogo Chicas */}
-      <section id="catalogo">
+      {/* Catálogo de chicas */}
+      <section id="catalogo" style={{ padding: "60px 20px" }}>
         <h2>Nuestras Chicas 🦊</h2>
         <div className="catalogo-container">
-          {catalogoChicas.map((chica, idx) => (
-            <div key={idx} className="flip-card" onClick={() => {
-              const newFlip = [...flip];
-              newFlip[idx] = !newFlip[idx];
-              setFlip(newFlip);
-            }}>
-              <div className={`flip-card-inner ${flip[idx] ? "flipped" : ""}`}>
+          {[1, 2, 3].map((num, idx) => (
+            <div key={idx} className="flip-card" onClick={() => flipCard(idx)}>
+              <div className={`flip-card-inner ${flipped[idx] ? "flipped" : ""}`}>
                 <div className="flip-card-front">
-                  <img src={chica.img} alt={chica.nombre} />
+                  <img src={`/catalogo${num}.jpg`} alt={`Chica ${num}`} />
                 </div>
                 <div className="flip-card-back">
-                  <h3>{chica.nombre}, {chica.edad}</h3>
-                  <p>{chica.desc}</p>
-                  <p>{chica.precio}</p>
+                  <h3>Chica {num}</h3>
+                  <p>Descripción breve de la chica {num}. Precio: $XXX</p>
                 </div>
               </div>
             </div>
@@ -105,33 +87,41 @@ export default function Home() {
       </section>
 
       {/* Planes */}
-      <section id="planes">
-        <h2>Nuestros Planes 🔥</h2>
+      <section id="planes" style={{ padding: "60px 20px" }}>
+        <h2>Nuestros Paquetes 🔥</h2>
         <div className="planes-container">
-          {planes.map((plan, idx) => (
-            <div key={idx} className={`plan-card ${plan.destacado ? "destacado" : ""}`}>
-              <h3>{plan.titulo}</h3>
-              <p>{plan.desc}</p>
-            </div>
-          ))}
+          <div className="plan-card">
+            <h3>Plan Básico</h3>
+            <p>Acceso a chat básico y matches ilimitados. Ideal para empezar a coquetear.</p>
+          </div>
+          <div className="plan-card destacado">
+            <h3>Plan Premium</h3>
+            <p>Incluye videollamadas privadas y regalos virtuales. La experiencia completa.</p>
+          </div>
+          <div className="plan-card">
+            <h3>Plan VIP</h3>
+            <p>Acceso exclusivo a perfiles top, soporte 24/7 y eventos privados.</p>
+          </div>
         </div>
       </section>
 
       {/* Opiniones */}
-      <section id="opiniones">
-        <h2>Opiniones 💬</h2>
+      <section id="opiniones" style={{ padding: "60px 20px" }}>
+        <h2>Opiniones de nuestros usuarios 💬</h2>
         <div className="opiniones-container">
-          {opiniones.map((o, idx) => (
-            <blockquote key={idx}>
-              <p>“{o.texto}”</p>
-              <footer>— {o.nombre}</footer>
-            </blockquote>
-          ))}
+          <blockquote>
+            <p>“Nunca pensé que tendría una cita virtual tan divertida y realista. Foxy Date me salvó del aburrimiento.”</p>
+            <footer>— Carlos, 29</footer>
+          </blockquote>
+          <blockquote>
+            <p>“Me encanta el plan Premium, las videollamadas son súper fluidas y seguras.”</p>
+            <footer>— Sofía, 25</footer>
+          </blockquote>
         </div>
       </section>
 
       {/* Contacto */}
-      <section id="contacto">
+      <section id="contacto" style={{ padding: "60px 20px" }}>
         <h2>Contáctanos 📩</h2>
         <form
           onSubmit={(e) => {
@@ -145,13 +135,15 @@ export default function Home() {
         >
           <input type="text" name="nombre" placeholder="Tu nombre" required />
           <input type="email" name="email" placeholder="Tu correo" required />
-          <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required />
+          <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
           <button type="submit">Enviar por WhatsApp</button>
         </form>
       </section>
 
       {/* Footer */}
-      <footer>© 2025 Foxy Date 🦊 | Amor virtual, real diversión.</footer>
+      <footer>
+        <p>© 2025 Foxy Date 🦊 | Amor virtual, real diversión.</p>
+      </footer>
     </>
   );
 }
