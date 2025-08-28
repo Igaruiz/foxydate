@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 export default function Home() {
   const [flip, setFlip] = useState([false, false, false]);
   const [carouselIndex, setCarouselIndex] = useState(0);
+
   const carouselImages = [
     "/galeria1.jpg",
     "/galeria2.jpg",
@@ -10,6 +11,7 @@ export default function Home() {
     "/galeria4.jpg",
     "/galeria5.jpg"
   ];
+
   const catalogoChicas = [
     { nombre: "Chica 1", edad: 22, precio: "$30", img: "/catalogo1.jpg", desc: "Extrovertida y divertida." },
     { nombre: "Chica 2", edad: 25, precio: "$40", img: "/catalogo2.jpg", desc: "Romántica y aventurera." },
@@ -53,14 +55,12 @@ export default function Home() {
       </section>
 
       {/* Carrusel Galería */}
-      <section style={{ position: "relative", maxWidth: "900px", margin: "0 auto 50px", overflow: "hidden", borderRadius: "20px" }}>
+      <section className="carousel-container">
         <div
           className="carousel-track"
           ref={carouselRef}
           style={{
-            display: "flex",
-            transform: `translateX(-${carouselIndex * 100}%)`,
-            transition: "transform 0.7s ease"
+            transform: `translateX(-${carouselIndex * 100}%)`
           }}
         >
           {carouselImages.map((img, idx) => (
@@ -72,7 +72,7 @@ export default function Home() {
       {/* Catálogo Chicas */}
       <section id="catalogo">
         <h2>Nuestras Chicas 🦊</h2>
-        <div style={{ display: "flex", justifyContent: "center", gap: "30px", flexWrap: "wrap" }}>
+        <div className="catalogo-container">
           {catalogoChicas.map((chica, idx) => (
             <div key={idx} className="flip-card" onClick={() => {
               const newFlip = [...flip];
@@ -106,7 +106,6 @@ export default function Home() {
             const texto = `👋 Hola, soy ${nombre} (${email}).%0A%0A${mensaje}`;
             window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
           }}
-          style={{ maxWidth: "500px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "10px" }}
         >
           <input type="text" name="nombre" placeholder="Tu nombre" required />
           <input type="email" name="email" placeholder="Tu correo" required />
