@@ -1,84 +1,242 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [flipIndex, setFlipIndex] = useState(null);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-
-  const catalogo = [
-    { nombre: "Chica 1", descripcion: "Divertida y coqueta.", imagen: "/catalogo1.jpg", precio: "$10" },
-    { nombre: "Chica 2", descripcion: "Simpática y atrevida.", imagen: "/catalogo2.jpg", precio: "$15" },
-    { nombre: "Chica 3", descripcion: "Romántica y dulce.", imagen: "/catalogo3.jpg", precio: "$20" }
-  ];
-
-  const galeria = [
-    "/galeria1.jpg",
-    "/galeria2.jpg",
-    "/galeria3.jpg",
-    "/galeria4.jpg",
-    "/galeria5.jpg"
-  ];
-
-  const carouselRef = useRef(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCarouselIndex((prev) => (prev + 1) % galeria.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.style.transform = `translateX(-${carouselIndex * 100}%)`;
-    }
-  }, [carouselIndex]);
 
   return (
     <>
-      {/* Navbar */}
-      <header>
-        <img src="/logo.png" alt="Logo" />
-        <nav className={menuOpen ? "nav open" : "nav"}>
-          <button className="nav-btn" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setMenuOpen(false); }}>Top</button>
-          <button className="nav-btn" onClick={() => { document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Chicas</button>
-          <button className="nav-btn" onClick={() => { document.getElementById("planes").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Paquetes</button>
-          <button className="nav-btn" onClick={() => { document.getElementById("opiniones").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Opiniones</button>
-          <button className="nav-btn" onClick={() => { document.getElementById("contacto").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Contacto</button>
+      {/* Navbar fija */}
+      <header
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 1000,
+          background: "rgba(0,0,0,0.85)",
+          backdropFilter: "blur(10px)",
+          padding: "15px 30px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        {/* Logo */}
+        <a href="#hero">
+          <img
+            src="/logo.png"
+            alt="Foxy Date Logo"
+            style={{ height: "40px" }}
+          />
+        </a>
+
+        {/* Botón hamburguesa (móvil) */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{
+            display: "block",
+            background: "none",
+            border: "none",
+            color: "white",
+            fontSize: "28px",
+            cursor: "pointer",
+          }}
+          className="md:hidden"
+        >
+          ☰
+        </button>
+
+        {/* Links */}
+        <nav
+          style={{
+            display: menuOpen ? "block" : "flex",
+            gap: "20px",
+            position: menuOpen ? "absolute" : "static",
+            top: menuOpen ? "60px" : "auto",
+            right: menuOpen ? "20px" : "auto",
+            background: menuOpen ? "rgba(0,0,0,0.9)" : "transparent",
+            padding: menuOpen ? "20px" : 0,
+            borderRadius: "10px",
+          }}
+        >
+          <a href="#hero" style={{ color: "white", textDecoration: "none" }}>Inicio</a>
+          <a href="#catalogo" style={{ color: "white", textDecoration: "none" }}>Catálogo</a>
+          <a href="#galeria" style={{ color: "white", textDecoration: "none" }}>Galería</a>
+          <a href="#planes" style={{ color: "white", textDecoration: "none" }}>Planes</a>
+          <a href="#opiniones" style={{ color: "white", textDecoration: "none" }}>Opiniones</a>
+          <a href="#contacto" style={{ color: "white", textDecoration: "none" }}>Contacto</a>
+          <a
+            href="#hero"
+            style={{
+              background: "#ff004f",
+              padding: "6px 12px",
+              borderRadius: "8px",
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
+            ⬆ Top
+          </a>
         </nav>
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
       </header>
 
       {/* Hero */}
-      <section className="hero-container">
-        <h1>Bienvenido a Foxy Date 🦊</h1>
-        <p>Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables.</p>
-        <a href="#catalogo" className="button">Ver catálogo 🔥</a>
+      <section
+        id="hero"
+        style={{
+          padding: "100px 20px 40px", // 🔥 reducido el espacio inferior
+          textAlign: "center",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "48px",
+            fontWeight: "bold",
+            color: "#ff004f",
+            marginBottom: "20px",
+          }}
+        >
+          Bienvenido a Foxy Date 🦊
+        </h1>
+        <p style={{ fontSize: "20px", maxWidth: "700px", margin: "0 auto 20px" }}>
+          Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive
+          momentos inolvidables con nuestras chicas virtuales.
+        </p>
+        <a
+          href="#catalogo"
+          style={{
+            backgroundColor: "#ff004f",
+            color: "white",
+            padding: "15px 30px",
+            borderRadius: "30px",
+            fontSize: "18px",
+            textDecoration: "none",
+          }}
+        >
+          Ver catálogo 🔥
+        </a>
       </section>
 
-      {/* Carrusel de Galería */}
-      <section className="carousel-container">
-        <div className="carousel-track" ref={carouselRef}>
-          {galeria.map((img, i) => (
-            <img key={i} src={img} alt={`Galeria ${i+1}`} />
+      {/* Galería */}
+      <section
+        id="galeria"
+        style={{
+          padding: "40px 20px", // 🔥 reducido el espacio superior
+          textAlign: "center",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "36px",
+            marginBottom: "30px",
+            color: "#ff004f",
+            textAlign: "center",
+          }}
+        >
+          Galería 📸
+        </h2>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "15px",
+            overflowX: "auto",
+            padding: "10px",
+          }}
+        >
+          {[1, 2, 3, 4, 5].map((num) => (
+            <img
+              key={num}
+              src={`/galeria${num}.jpg`}
+              alt={`Galería ${num}`}
+              style={{
+                height: "250px",
+                borderRadius: "15px",
+                boxShadow: "0px 0px 15px rgba(0,0,0,0.6)",
+              }}
+            />
           ))}
         </div>
       </section>
 
-      {/* Catálogo de Chicas */}
-      <section id="catalogo">
-        <h2>Nuestras Chicas 🦊</h2>
-        <div className="catalogo-container">
-          {catalogo.map((chica, i) => (
-            <div key={i} className="flip-card" onClick={() => setFlipIndex(flipIndex === i ? null : i)}>
-              <div className={`flip-card-inner ${flipIndex === i ? "flipped" : ""}`}>
-                <div className="flip-card-front">
-                  <img src={chica.imagen} alt={chica.nombre} />
+      {/* Catálogo */}
+      <section id="catalogo" style={{ padding: "60px 20px", textAlign: "center" }}>
+        <h2 style={{ fontSize: "36px", marginBottom: "30px", color: "#ff004f" }}>
+          Nuestras Chicas 🦊
+        </h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "20px",
+            maxWidth: "1000px",
+            margin: "0 auto",
+          }}
+        >
+          {[1, 2, 3].map((num) => (
+            <div
+              key={num}
+              style={{
+                perspective: "1000px",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "350px",
+                  transformStyle: "preserve-3d",
+                  transition: "transform 0.6s",
+                }}
+                className="card"
+              >
+                {/* Front */}
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    backfaceVisibility: "hidden",
+                  }}
+                >
+                  <img
+                    src={`/catalogo${num}.jpg`}
+                    alt={`Chica ${num}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "15px",
+                    }}
+                  />
                 </div>
-                <div className="flip-card-back">
-                  <h3>{chica.nombre}</h3>
-                  <p>{chica.descripcion}</p>
-                  <p>{chica.precio}</p>
+                {/* Back */}
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    backfaceVisibility: "hidden",
+                    background: "rgba(0,0,0,0.85)",
+                    color: "white",
+                    borderRadius: "15px",
+                    transform: "rotateY(180deg)",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                  }}
+                >
+                  <h3 style={{ fontSize: "22px", marginBottom: "10px" }}>
+                    Foxy {num}
+                  </h3>
+                  <p style={{ fontSize: "16px", marginBottom: "15px" }}>
+                    Chica encantadora lista para conversar y divertirse contigo.
+                  </p>
+                  <span style={{ color: "#ff004f", fontWeight: "bold" }}>
+                    $20 / sesión
+                  </span>
                 </div>
               </div>
             </div>
@@ -87,60 +245,134 @@ export default function Home() {
       </section>
 
       {/* Planes */}
-      <section id="planes">
-        <h2>Nuestros Paquetes 🔥</h2>
-        <div className="planes-container">
-          <div className="plan-card">
-            <h3>Plan Básico</h3>
-            <p>Acceso a chat básico y matches ilimitados. Ideal para empezar a coquetear.</p>
+      <section
+        id="planes"
+        style={{ padding: "60px 20px", textAlign: "center" }}
+      >
+        <h2 style={{ fontSize: "36px", marginBottom: "30px", color: "#ff004f" }}>
+          Nuestros Paquetes 🔥
+        </h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "20px",
+            maxWidth: "900px",
+            margin: "0 auto",
+          }}
+        >
+          <div style={{ background: "#111", padding: "20px", borderRadius: "15px" }}>
+            <h3 style={{ color: "#ff004f", marginBottom: "10px" }}>Plan Básico</h3>
+            <p>Acceso a chat básico y matches ilimitados.</p>
           </div>
-          <div className="plan-card destacado">
-            <h3>Plan Premium</h3>
-            <p>Incluye videollamadas privadas y regalos virtuales. La experiencia completa.</p>
+          <div style={{ background: "#111", padding: "20px", borderRadius: "15px" }}>
+            <h3 style={{ color: "#ff004f", marginBottom: "10px" }}>Plan Premium</h3>
+            <p>Incluye videollamadas privadas y regalos virtuales.</p>
           </div>
-          <div className="plan-card">
-            <h3>Plan VIP</h3>
-            <p>Acceso exclusivo a perfiles top, soporte 24/7 y eventos privados.</p>
+          <div style={{ background: "#111", padding: "20px", borderRadius: "15px" }}>
+            <h3 style={{ color: "#ff004f", marginBottom: "10px" }}>Plan VIP</h3>
+            <p>Acceso exclusivo a perfiles top y eventos privados.</p>
           </div>
         </div>
       </section>
 
       {/* Opiniones */}
-      <section id="opiniones">
-        <h2>Opiniones de nuestros usuarios 💬</h2>
-        <div className="opiniones-container">
-          <blockquote>
-            <p>“Nunca pensé que tendría una cita virtual tan divertida y realista. Foxy Date me salvó del aburrimiento.”</p>
-            <footer>— Carlos, 29</footer>
+      <section
+        id="opiniones"
+        style={{ padding: "60px 20px", textAlign: "center" }}
+      >
+        <h2 style={{ fontSize: "36px", marginBottom: "30px", color: "#ff004f" }}>
+          Opiniones 💬
+        </h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "20px",
+            maxWidth: "900px",
+            margin: "0 auto",
+          }}
+        >
+          <blockquote style={{ background: "#111", padding: "20px", borderRadius: "15px" }}>
+            “Una experiencia increíble, divertida y realista.”
           </blockquote>
-          <blockquote>
-            <p>“Me encanta el plan Premium, las videollamadas son súper fluidas y seguras.”</p>
-            <footer>— Sofía, 25</footer>
+          <blockquote style={{ background: "#111", padding: "20px", borderRadius: "15px" }}>
+            “Me encanta el plan Premium, superó mis expectativas.”
           </blockquote>
         </div>
       </section>
 
       {/* Contacto */}
-      <section id="contacto">
-        <h2>Contáctanos 📩</h2>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          const nombre = e.target.nombre.value;
-          const email = e.target.email.value;
-          const mensaje = e.target.mensaje.value;
-          const texto = `👋 Hola, soy ${nombre} (${email}).%0A%0A${mensaje}`;
-          window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
-        }}>
-          <input type="text" name="nombre" placeholder="Tu nombre" required />
-          <input type="email" name="email" placeholder="tucorreo@email.com" required />
-          <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
-          <button type="submit">Enviar por WhatsApp</button>
+      <section
+        id="contacto"
+        style={{ padding: "60px 20px", textAlign: "center" }}
+      >
+        <h2 style={{ fontSize: "36px", marginBottom: "30px", color: "#ff004f" }}>
+          Contáctanos 📩
+        </h2>
+        <form
+          style={{
+            background: "#111",
+            padding: "30px",
+            borderRadius: "15px",
+            maxWidth: "500px",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+          }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            const nombre = e.target.nombre.value;
+            const email = e.target.email.value;
+            const mensaje = e.target.mensaje.value;
+            const texto = `👋 Hola, soy ${nombre} (${email}).%0A%0A${mensaje}`;
+            window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
+          }}
+        >
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Tu nombre"
+            required
+            style={{ padding: "10px", borderRadius: "8px", border: "none" }}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Tu correo"
+            required
+            style={{ padding: "10px", borderRadius: "8px", border: "none" }}
+          />
+          <textarea
+            name="mensaje"
+            rows="4"
+            placeholder="Escribe tu mensaje..."
+            required
+            style={{ padding: "10px", borderRadius: "8px", border: "none" }}
+          />
+          <button
+            type="submit"
+            style={{
+              background: "#ff004f",
+              color: "white",
+              padding: "12px",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            Enviar por WhatsApp
+          </button>
         </form>
       </section>
 
       {/* Footer */}
-      <footer>
-        <p>© 2025 Foxy Date 🦊 | Amor virtual, real diversión.</p>
+      <footer style={{ background: "#000", padding: "30px", textAlign: "center" }}>
+        <p style={{ color: "#aaa" }}>
+          © 2025 Foxy Date 🦊 | Amor virtual, real diversión.
+        </p>
       </footer>
     </>
   );
