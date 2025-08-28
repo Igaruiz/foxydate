@@ -151,3 +151,8 @@ form button:hover { box-shadow: 0 0 20px #ff66a3; transform: scale(1.05); }
 
 /* Footer */
 footer { text-align: center; padding: 30px 20px; background: rgba(0,0,0,0.85); color: #ccc; font-size: 14px; }
+
+/* Corregir scroll tapado por navbar */
+section {
+  scroll-margin-top: 100px; /* Ajustar según altura del navbar */
+}
