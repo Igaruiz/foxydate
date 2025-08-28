@@ -18,14 +18,6 @@ export default function Home() {
     );
     sections.forEach(section => observer.observe(section));
 
-    // Parallax hero
-    const heroImg = document.querySelector(".hero-container img");
-    const handleScroll = () => {
-      const offset = window.pageYOffset;
-      if(heroImg) heroImg.style.transform = `translateY(${offset * 0.2}px)`;
-    };
-    window.addEventListener("scroll", handleScroll);
-
     // Carrusel automático
     let index = 0;
     const track = document.querySelector(".carousel-track");
@@ -38,15 +30,22 @@ export default function Home() {
     }, 5000);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       clearInterval(interval);
     }
   }, []);
 
   const chicas = [
-    { id:1, nombre:"Luna", img:"/chica1.jpg", descripcion:"Charla divertida y atrevida. 30min x $10" },
-    { id:2, nombre:"Mia", img:"/chica2.jpg", descripcion:"Experiencia Premium y videollamadas. 30min x $15" },
-    { id:3, nombre:"Sofi", img:"/chica3.jpg", descripcion:"Rompehielos, emojis y regalos virtuales. 30min x $20" },
+    { id:1, nombre:"Luna", img:"/catalogo1.jpg", descripcion:"Charla divertida y atrevida. 30min x $10" },
+    { id:2, nombre:"Mia", img:"/catalogo2.jpg", descripcion:"Experiencia Premium y videollamadas. 30min x $15" },
+    { id:3, nombre:"Sofi", img:"/catalogo3.jpg", descripcion:"Rompehielos, emojis y regalos virtuales. 30min x $20" },
+  ];
+
+  const galerias = [
+    "/galeria1.jpg",
+    "/galeria2.jpg",
+    "/galeria3.jpg",
+    "/galeria4.jpg",
+    "/galeria5.jpg",
   ];
 
   const scrollTo = (id) => {
@@ -103,7 +102,6 @@ export default function Home() {
           <p>Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables con nuestras chicas virtuales.</p>
           <a href="#catalogo" className="button">Ver catálogo 🔥</a>
         </div>
-        <img src="/chica1.jpg" alt="Hero Chica"/>
       </section>
 
       {/* Galería / Carrusel */}
@@ -111,9 +109,7 @@ export default function Home() {
         <h2>Galería 📸</h2>
         <div style={{position:"relative", width:"90%", maxWidth:"900px", overflow:"hidden", borderRadius:"20px"}}>
           <div className="carousel-track" data-index="0">
-            <img src="/galeria1.jpg" alt="" />
-            <img src="/galeria2.jpg" alt="" />
-            <img src="/galeria3.jpg" alt="" />
+            {galerias.map((img,i)=><img key={i} src={img} alt={`Galería ${i+1}`} />)}
           </div>
           <button className="carousel-prev" onClick={handlePrev}>‹</button>
           <button className="carousel-next" onClick={handleNext}>›</button>
