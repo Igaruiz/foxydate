@@ -18,6 +18,17 @@ export default function Home() {
     { nombre: "Chica 3", edad: 28, precio: "$50", img: "/catalogo3.jpg", desc: "Misteriosa y encantadora." }
   ];
 
+  const planes = [
+    { titulo: "Plan Básico", desc: "Acceso a chat básico y matches ilimitados. Ideal para empezar a coquetear.", destacado: false },
+    { titulo: "Plan Premium", desc: "Incluye videollamadas privadas y regalos virtuales. La experiencia completa.", destacado: true },
+    { titulo: "Plan VIP", desc: "Acceso exclusivo a perfiles top, soporte 24/7 y eventos privados.", destacado: false }
+  ];
+
+  const opiniones = [
+    { nombre: "Carlos, 29", texto: "Nunca pensé que tendría una cita virtual tan divertida y realista. Foxy Date me salvó del aburrimiento." },
+    { nombre: "Sofía, 25", texto: "Me encanta el plan Premium, las videollamadas son súper fluidas y seguras." }
+  ];
+
   const carouselRef = useRef();
 
   // Carrusel automático
@@ -28,7 +39,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll a sección
   const scrollTo = id => {
     const el = document.getElementById(id);
     if(el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -42,6 +52,8 @@ export default function Home() {
         <nav>
           <button className="nav-btn" onClick={() => scrollTo("hero")}>Inicio</button>
           <button className="nav-btn" onClick={() => scrollTo("catalogo")}>Chicas</button>
+          <button className="nav-btn" onClick={() => scrollTo("planes")}>Planes</button>
+          <button className="nav-btn" onClick={() => scrollTo("opiniones")}>Opiniones</button>
           <button className="nav-btn" onClick={() => scrollTo("contacto")}>Contacto</button>
           <button className="nav-btn" onClick={() => window.scrollTo({top:0, behavior:"smooth"})}>Top</button>
         </nav>
@@ -59,9 +71,7 @@ export default function Home() {
         <div
           className="carousel-track"
           ref={carouselRef}
-          style={{
-            transform: `translateX(-${carouselIndex * 100}%)`
-          }}
+          style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
         >
           {carouselImages.map((img, idx) => (
             <img key={idx} src={img} alt={`Galería ${idx+1}`} />
@@ -90,6 +100,32 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Planes */}
+      <section id="planes">
+        <h2>Nuestros Planes 🔥</h2>
+        <div className="planes-container">
+          {planes.map((plan, idx) => (
+            <div key={idx} className={`plan-card ${plan.destacado ? "destacado" : ""}`}>
+              <h3>{plan.titulo}</h3>
+              <p>{plan.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Opiniones */}
+      <section id="opiniones">
+        <h2>Opiniones 💬</h2>
+        <div className="opiniones-container">
+          {opiniones.map((o, idx) => (
+            <blockquote key={idx}>
+              <p>“{o.texto}”</p>
+              <footer>— {o.nombre}</footer>
+            </blockquote>
           ))}
         </div>
       </section>
