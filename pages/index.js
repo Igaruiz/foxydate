@@ -30,8 +30,8 @@ export default function Home() {
       </header>
 
       {/* ✅ Hero Section */}
-      <section id="hero" className="hero">
-        <div className="hero-content">
+      <section id="inicio" className="inicio">
+        <div className="inicio-content">
           <h1>Bienvenido a Foxy Date 🦊</h1>
           <p>
             Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive
