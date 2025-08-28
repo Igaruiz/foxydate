@@ -1,103 +1,253 @@
-/* Reset básico */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
+  overflow-x: hidden;
   background: url('/fondo.jpg') no-repeat center center fixed;
   background-size: cover;
+  font-family: Arial, sans-serif;
   color: white;
-  line-height: 1.5;
 }
 
-/* Ajustes generales */
-section {
-  max-width: 1200px;
-  margin: 0 auto;
+/* ✅ Navbar fija */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* Navbar */
-header nav a {
-  transition: color 0.3s ease, transform 0.2s ease;
+.logo {
+  height: 40px;
 }
 
-header nav a:hover {
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
   color: #ff004f;
-  transform: scale(1.05);
 }
 
-/* Fix del scroll con navbar fija */
-section[id] {
-  scroll-margin-top: 80px; /* 🔥 asegura que los títulos no se tapen */
+/* ✅ Hero */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 120px; /* espacio bajo navbar */
 }
 
-/* Galería scroll horizontal */
-#galeria div {
-  scrollbar-width: thin;
-  scrollbar-color: #ff004f transparent;
+.hero-content {
+  background: rgba(0,0,0,0.6);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 600px;
 }
 
-#galeria div::-webkit-scrollbar {
-  height: 8px;
+.hero h1 {
+  font-size: 48px;
+  color: #ff004f;
 }
-#galeria div::-webkit-scrollbar-thumb {
+
+.hero p {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.btn-primary {
   background: #ff004f;
-  border-radius: 10px;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-/* Flip Card */
-.card:hover {
+/* ✅ Carrusel */
+.galeria {
+  margin-top: -40px; /* reduce espacio */
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel {
+  height: 100%;
+  position: relative;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+.carousel-slide.active {
+  left: 0;
+  opacity: 1;
+}
+
+/* ✅ Secciones generales */
+.section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 36px;
+  color: #ff004f;
+  margin-bottom: 30px;
+}
+
+/* ✅ Catálogo */
+.catalogo-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  height: 320px;
+  perspective: 1000px;
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  transition: transform 0.8s;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-front {
+  background: black;
+}
+
+.card-back {
+  background: #ff004f;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card:hover .card-front {
   transform: rotateY(180deg);
 }
 
-/* Responsivo */
+.card:hover .card-back {
+  transform: rotateY(0);
+}
+
+/* ✅ Planes */
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.plan {
+  background: rgba(0,0,0,0.7);
+  padding: 20px;
+  border-radius: 15px;
+  min-width: 200px;
+}
+
+.plan.destacado {
+  border: 2px solid #ff004f;
+}
+
+/* ✅ Testimonios */
+blockquote {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 10px auto;
+  max-width: 500px;
+  font-style: italic;
+}
+
+/* ✅ Contacto */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: auto;
+}
+
+input, textarea, button {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+}
+
+input, textarea {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+button {
+  background: #ff004f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff336f;
+}
+
+/* ✅ Footer */
+.footer {
+  background: rgba(0,0,0,0.9);
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ✅ Responsivo */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 32px !important;
-  }
-
-  h2 {
-    font-size: 28px !important;
-  }
-
-  p {
-    font-size: 16px !important;
-  }
-
-  /* Navbar móvil */
-  header {
-    padding: 10px 20px !important;
-  }
-
-  header nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: flex-start;
-  }
-
-  header nav a {
-    display: block;
-    width: 100%;
-  }
-
-  /* Centrado de secciones */
-  section {
-    text-align: center !important;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+  .hero h1 { font-size: 32px; }
+  .hero p { font-size: 16px; }
+  .galeria { height: 250px; }
+  .nav-links { flex-wrap: wrap; gap: 10px; justify-content: center; }
 }
