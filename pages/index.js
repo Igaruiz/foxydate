@@ -1,84 +1,84 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
-  const [flipped, setFlipped] = useState([false, false, false]);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [flipIndex, setFlipIndex] = useState(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const catalogo = [
+    { nombre: "Chica 1", descripcion: "Divertida y coqueta.", imagen: "/catalogo1.jpg", precio: "$10" },
+    { nombre: "Chica 2", descripcion: "Simpática y atrevida.", imagen: "/catalogo2.jpg", precio: "$15" },
+    { nombre: "Chica 3", descripcion: "Romántica y dulce.", imagen: "/catalogo3.jpg", precio: "$20" }
+  ];
+
+  const galeria = [
+    "/galeria1.jpg",
+    "/galeria2.jpg",
+    "/galeria3.jpg",
+    "/galeria4.jpg",
+    "/galeria5.jpg"
+  ];
+
   const carouselRef = useRef(null);
 
-  const flipCard = (index) => {
-    const newFlipped = [...flipped];
-    newFlipped[index] = !newFlipped[index];
-    setFlipped(newFlipped);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarouselIndex((prev) => (prev + 1) % galeria.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const nextSlide = () => {
-    const track = carouselRef.current;
-    track.appendChild(track.firstElementChild);
-  };
-
-  const prevSlide = () => {
-    const track = carouselRef.current;
-    track.insertBefore(track.lastElementChild, track.firstElementChild);
-  };
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.style.transform = `translateX(-${carouselIndex * 100}%)`;
+    }
+  }, [carouselIndex]);
 
   return (
     <>
       {/* Navbar */}
       <header>
         <img src="/logo.png" alt="Logo" />
-        <nav>
-          <button className="nav-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            Top
-          </button>
-          <button className="nav-btn" onClick={() => document.getElementById("catalogo").scrollIntoView({behavior:"smooth"})}>
-            Chicas
-          </button>
-          <button className="nav-btn" onClick={() => document.getElementById("planes").scrollIntoView({behavior:"smooth"})}>
-            Paquetes
-          </button>
-          <button className="nav-btn" onClick={() => document.getElementById("opiniones").scrollIntoView({behavior:"smooth"})}>
-            Opiniones
-          </button>
-          <button className="nav-btn" onClick={() => document.getElementById("contacto").scrollIntoView({behavior:"smooth"})}>
-            Contacto
-          </button>
+        <nav className={menuOpen ? "nav open" : "nav"}>
+          <button className="nav-btn" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setMenuOpen(false); }}>Top</button>
+          <button className="nav-btn" onClick={() => { document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Chicas</button>
+          <button className="nav-btn" onClick={() => { document.getElementById("planes").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Paquetes</button>
+          <button className="nav-btn" onClick={() => { document.getElementById("opiniones").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Opiniones</button>
+          <button className="nav-btn" onClick={() => { document.getElementById("contacto").scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); }}>Contacto</button>
         </nav>
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
       </header>
 
       {/* Hero */}
       <section className="hero-container">
         <h1>Bienvenido a Foxy Date 🦊</h1>
-        <p>Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables con nuestras chicas virtuales.</p>
+        <p>Tu experiencia virtual de citas más atrevida. Conoce, chatea y vive momentos inolvidables.</p>
         <a href="#catalogo" className="button">Ver catálogo 🔥</a>
       </section>
 
-      {/* Carrusel */}
+      {/* Carrusel de Galería */}
       <section className="carousel-container">
         <div className="carousel-track" ref={carouselRef}>
-          <img src="/galeria1.jpg" alt="Galería 1" />
-          <img src="/galeria2.jpg" alt="Galería 2" />
-          <img src="/galeria3.jpg" alt="Galería 3" />
-          <img src="/galeria4.jpg" alt="Galería 4" />
-          <img src="/galeria5.jpg" alt="Galería 5" />
-        </div>
-        <div style={{ textAlign: "center", marginTop: "10px" }}>
-          <button className="nav-btn" onClick={prevSlide}>◀</button>
-          <button className="nav-btn" onClick={nextSlide}>▶</button>
+          {galeria.map((img, i) => (
+            <img key={i} src={img} alt={`Galeria ${i+1}`} />
+          ))}
         </div>
       </section>
 
-      {/* Catálogo de chicas */}
-      <section id="catalogo" style={{ padding: "60px 20px" }}>
+      {/* Catálogo de Chicas */}
+      <section id="catalogo">
         <h2>Nuestras Chicas 🦊</h2>
         <div className="catalogo-container">
-          {[1, 2, 3].map((num, idx) => (
-            <div key={idx} className="flip-card" onClick={() => flipCard(idx)}>
-              <div className={`flip-card-inner ${flipped[idx] ? "flipped" : ""}`}>
+          {catalogo.map((chica, i) => (
+            <div key={i} className="flip-card" onClick={() => setFlipIndex(flipIndex === i ? null : i)}>
+              <div className={`flip-card-inner ${flipIndex === i ? "flipped" : ""}`}>
                 <div className="flip-card-front">
-                  <img src={`/catalogo${num}.jpg`} alt={`Chica ${num}`} />
+                  <img src={chica.imagen} alt={chica.nombre} />
                 </div>
                 <div className="flip-card-back">
-                  <h3>Chica {num}</h3>
-                  <p>Descripción breve de la chica {num}. Precio: $XXX</p>
+                  <h3>{chica.nombre}</h3>
+                  <p>{chica.descripcion}</p>
+                  <p>{chica.precio}</p>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function Home() {
       </section>
 
       {/* Planes */}
-      <section id="planes" style={{ padding: "60px 20px" }}>
+      <section id="planes">
         <h2>Nuestros Paquetes 🔥</h2>
         <div className="planes-container">
           <div className="plan-card">
@@ -106,7 +106,7 @@ export default function Home() {
       </section>
 
       {/* Opiniones */}
-      <section id="opiniones" style={{ padding: "60px 20px" }}>
+      <section id="opiniones">
         <h2>Opiniones de nuestros usuarios 💬</h2>
         <div className="opiniones-container">
           <blockquote>
@@ -121,20 +121,18 @@ export default function Home() {
       </section>
 
       {/* Contacto */}
-      <section id="contacto" style={{ padding: "60px 20px" }}>
+      <section id="contacto">
         <h2>Contáctanos 📩</h2>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            const nombre = e.target.nombre.value;
-            const email = e.target.email.value;
-            const mensaje = e.target.mensaje.value;
-            const texto = `👋 Hola, soy ${nombre} (${email}).%0A%0A${mensaje}`;
-            window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
-          }}
-        >
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          const nombre = e.target.nombre.value;
+          const email = e.target.email.value;
+          const mensaje = e.target.mensaje.value;
+          const texto = `👋 Hola, soy ${nombre} (${email}).%0A%0A${mensaje}`;
+          window.open(`https://wa.me/5491112345678?text=${texto}`, "_blank");
+        }}>
           <input type="text" name="nombre" placeholder="Tu nombre" required />
-          <input type="email" name="email" placeholder="Tu correo" required />
+          <input type="email" name="email" placeholder="tucorreo@email.com" required />
           <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
           <button type="submit">Enviar por WhatsApp</button>
         </form>
