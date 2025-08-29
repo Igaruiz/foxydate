@@ -137,6 +137,7 @@ html, body {
   width: 250px;
   height: 320px;
   perspective: 1000px;
+  position: relative;
 }
 
 .card-front, .card-back {
@@ -176,7 +177,7 @@ html, body {
   transform: rotateY(0);
 }
 
-/* ✅ Planes */
+/* ✅ Planes & Extras */
 .grid {
   display: flex;
   justify-content: center;
