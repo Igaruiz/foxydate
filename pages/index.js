@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <>
-      {/* ✅ Navbar (no se toca) */}
+      {/* ✅ Navbar */}
       <header className="navbar">
         <img src="/logo.png" alt="Foxy Date Logo" className="logo" />
         <nav className="nav-links">
@@ -100,6 +100,16 @@ export default function Home() {
           <div className="plan">Plan Básico: Chat ilimitado 💬</div>
           <div className="plan destacado">Plan Premium: Videollamadas 🎥</div>
           <div className="plan">Plan VIP: Exclusivo 💎</div>
+        </div>
+      </section>
+
+      {/* ✅ Extras */}
+      <section id="extras" className="section">
+        <h2>Extras ✨</h2>
+        <div className="grid">
+          <div className="plan">Fotos exclusivas 📸</div>
+          <div className="plan">Regalos virtuales 🎁</div>
+          <div className="plan">Eventos privados 🎉</div>
         </div>
       </section>
 
